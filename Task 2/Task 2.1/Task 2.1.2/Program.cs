@@ -15,51 +15,65 @@ namespace CustomPaint
             string name = Input.InputName();
             Console.WriteLine();
 
-            Figure figure;
+            string input = String.Empty;
 
-            while (true)
+            while (input != "5")
             {
-                Console.WriteLine($"{name}, выберите действие:");
-                Console.WriteLine("1. Добавить фигуру");
-                Console.WriteLine("2. Вывести фигуры");
-                Console.WriteLine("3. Очистить холст");
-                Console.WriteLine("4. Сменить пользователя");
-                Console.WriteLine("5. Выход");
-
-                switch (Console.ReadLine())
-                {
-                    case "1":
-                        Console.WriteLine();
-                        figure = Input.InputFigure();
-                        if (figure != null)
-                        {
-                            figureList.Add(figure);
-                        }
-                        Console.WriteLine();
-                        break;
-                    case "2":
-                        Console.WriteLine();
-                        DisplayFigureList();
-                        Console.WriteLine();
-                        break;
-                    case "3":
-                        Console.WriteLine();
-                        ClearCanvas();
-                        Console.WriteLine();
-                        break;
-                    case "4":
-                        Console.WriteLine();
-                        name = Input.InputName();
-                        Console.WriteLine();
-                        break;
-                    case "5":
-                        return;
-                    default:
-                        Console.WriteLine("Недопустимый ввод");
-                        Console.WriteLine();
-                        break;
-                }
+                input = SelectAction(ref name);
             } 
+        }
+
+        /// <summary>
+        /// Selection menu
+        /// </summary>
+        /// <param name="name">User name</param>
+        /// <returns>Selection</returns>
+        static string SelectAction(ref string name)
+        {
+            Console.WriteLine($"{name}, выберите действие:");
+            Console.WriteLine("1. Добавить фигуру");
+            Console.WriteLine("2. Вывести фигуры");
+            Console.WriteLine("3. Очистить холст");
+            Console.WriteLine("4. Сменить пользователя");
+            Console.WriteLine("5. Выход");
+
+            string userInput = Console.ReadLine();
+
+            switch (userInput)
+            {
+                case "1":
+                    Console.WriteLine();
+                    Figure figure = Input.InputFigure();
+                    if (figure != null)
+                    {
+                        figureList.Add(figure);
+                    }
+                    Console.WriteLine();
+                    break;
+                case "2":
+                    Console.WriteLine();
+                    DisplayFigureList();
+                    Console.WriteLine();
+                    break;
+                case "3":
+                    Console.WriteLine();
+                    ClearCanvas();
+                    Console.WriteLine();
+                    break;
+                case "4":
+                    Console.WriteLine();
+                    name = Input.InputName();
+                    Console.WriteLine();
+                    break;
+                case "5":
+                    break;
+                default:
+                    Console.WriteLine("Недопустимый ввод");
+                    Console.WriteLine();
+                    break;
+            }
+
+            return userInput;
         }
 
         /// <summary>
