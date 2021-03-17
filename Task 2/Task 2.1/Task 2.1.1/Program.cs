@@ -6,6 +6,16 @@ namespace CustomTypes
     {
         static void Main(string[] args)
         {
+            TestCustomString();
+
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Test CustomString class instances 
+        /// </summary>
+        static void TestCustomString()
+        {
             Console.WriteLine("Тестирование класса CustomString");
             Console.WriteLine();
 
@@ -29,26 +39,26 @@ namespace CustomTypes
             CustomString str3 = new CustomString(teststring);
             Console.WriteLine("Тестирование функций сравнения объектов CustomString");
             Console.WriteLine("Новый объект CustomString str3 = new CustomString(teststring): {0}", str3);
-            Console.WriteLine("Функция CustomString.Compare(str1,str2) = {0}", CustomString.Compare(str1,str2));
+            Console.WriteLine("Функция CustomString.Compare(str1,str2) = {0}", CustomString.Compare(str1, str2));
             Console.WriteLine("Функция CustomString.Compare(str2,str3) = {0}", CustomString.Compare(str2, str3));
             Console.WriteLine("Переопределенная функция str2.Equals(str3) = {0}", str2.Equals(str3));
             Console.WriteLine("Переопределенная функция object.GetHashCode(): (str2.GetHashCode() == str3.GetHashCode()) = {0}", str2.GetHashCode() == str3.GetHashCode());
             Console.WriteLine("Переопределенный оператор (str2 == str3) = {0}", str2 == str3);
             Console.WriteLine("Переопределенный оператор (str2 != str3) = {0}", str2 != str3);
-            Console.WriteLine("Функция object.ReferenceEquals(str2,str3) = {0}", object.ReferenceEquals(str2,str3));
+            Console.WriteLine("Функция object.ReferenceEquals(str2,str3) = {0}", object.ReferenceEquals(str2, str3));
             Console.WriteLine();
 
             Console.WriteLine("Тестирование функций конкатенации");
-            Console.WriteLine("Функция конкатенации двух объектов CustomString: CustomString.Concat(str1,str2) = {0}", CustomString.Concat(str1,str2));
-            Console.WriteLine("Функция конкатенации объекта CustomString и символа: CustomString.Concat(str1,'A') = {0}", CustomString.Concat(str1,'A'));
-            Console.WriteLine("Функция конкатенации объекта CustomString и строки: CustomString.Concat(str1,\"XYZ\") = {0}", CustomString.Concat(str1,"XYZ"));
-            Console.WriteLine("Функция конкатенации объекта CustomString и массива символов: CustomString.Concat(str2,testchars) = {0}", CustomString.Concat(str2,testchars));
+            Console.WriteLine("Функция конкатенации двух объектов CustomString: CustomString.Concat(str1,str2) = {0}", CustomString.Concat(str1, str2));
+            Console.WriteLine("Функция конкатенации объекта CustomString и символа: CustomString.Concat(str1,'A') = {0}", CustomString.Concat(str1, 'A'));
+            Console.WriteLine("Функция конкатенации объекта CustomString и строки: CustomString.Concat(str1,\"XYZ\") = {0}", CustomString.Concat(str1, "XYZ"));
+            Console.WriteLine("Функция конкатенации объекта CustomString и массива символов: CustomString.Concat(str2,testchars) = {0}", CustomString.Concat(str2, testchars));
             Console.WriteLine("Перегруженный оператор \"+\" конкатенации двух объектов CustomString: str3 + str1 = {0}", str3 + str1);
             Console.WriteLine();
 
             Console.WriteLine("Тестирование функций символьного поиска в объекте CustomString");
             Console.WriteLine("Функция поиска индекса первого вхождения символа: str2.IndexOf('D') = {0}", str2.IndexOf('D'));
-            Console.WriteLine("Функция поиска индекса первого вхождения символа, начиная с произвольного стартового индекса: CustomString.Concat(str2,str3).IndexOf('A', 4) = {0}", CustomString.Concat(str2,str3).IndexOf('A', 4));
+            Console.WriteLine("Функция поиска индекса первого вхождения символа, начиная с произвольного стартового индекса: CustomString.Concat(str2,str3).IndexOf('A', 4) = {0}", CustomString.Concat(str2, str3).IndexOf('A', 4));
             Console.WriteLine("Функция проверки вхождения символа в объект CustomString: str3.Contains('f') = {0}", str3.Contains('f'));
             Console.WriteLine();
 
@@ -70,8 +80,6 @@ namespace CustomTypes
             Console.WriteLine();
 
             Console.WriteLine("Переопределенная функция object.ToString() вызывается неявно при каждом выводе объекта CustomString на консоль");
-
-            Console.ReadKey();
         }
     }
 
