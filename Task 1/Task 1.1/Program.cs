@@ -7,73 +7,83 @@ namespace Task1_1
     {
         static void Main(string[] args)
         {
-            while (true)
+            string input = String.Empty;
+
+            while (input != "q")
             {
-                Console.WriteLine("Введите номер подзадачи или q чтобы закрыть программу:");
-                Console.WriteLine("1 Rectangle");
-                Console.WriteLine("2 Triangle");
-                Console.WriteLine("3 Another triangle");
-                Console.WriteLine("4 X-mas tree");
-                Console.WriteLine("5 Sum of numbers");
-                Console.WriteLine("6 Font adjustment");
-                Console.WriteLine("7 Array processing");
-                Console.WriteLine("8 No positive");
-                Console.WriteLine("9 Non-negative sum");
-                Console.WriteLine("10 2D array");
+                DisplayTaskList();
+
+                input = Console.ReadLine();
+                SelectTask(input);
+            }
+        }
+
+        static void DisplayTaskList()
+        {
+            Console.WriteLine("Введите номер подзадачи или q чтобы закрыть программу:");
+            Console.WriteLine("1 Rectangle");
+            Console.WriteLine("2 Triangle");
+            Console.WriteLine("3 Another triangle");
+            Console.WriteLine("4 X-mas tree");
+            Console.WriteLine("5 Sum of numbers");
+            Console.WriteLine("6 Font adjustment");
+            Console.WriteLine("7 Array processing");
+            Console.WriteLine("8 No positive");
+            Console.WriteLine("9 Non-negative sum");
+            Console.WriteLine("10 2D array");
+            Console.WriteLine();
+        }
+
+        static void SelectTask(string userInput)
+        {
+            if (Int32.TryParse(userInput, out int taskNumber))
+            {
                 Console.WriteLine();
 
-                string input = Console.ReadLine();
-
-                if (input == "q")   break;
-                else if (Int32.TryParse(input, out int num))
+                switch (taskNumber)
                 {
-                    Console.WriteLine();
-
-                    switch (num)
-                    {
-                        case 1:
-                            CalcMath.CalcRectangleSquare();
-                            Console.WriteLine();
-                            break;
-                        case 2:
-                            DrawTriangles.DrawRightTriangle();
-                            Console.WriteLine();
-                            break;
-                        case 3:
-                            DrawTriangles.DrawEqualTriangle();
-                            Console.WriteLine();
-                            break;
-                        case 4:
-                            DrawTriangles.DrawXmasTree();
-                            Console.WriteLine();
-                            break;
-                        case 5:
-                            CalcMath.CalcSumMultipleNumbers(1000, 3, 5);
-                            Console.WriteLine();
-                            break;
-                        case 6:
-                            ProcessFont.FontAdjustment();
-                            Console.WriteLine();
-                            break;
-                        case 7:
-                            CalcArray.ArrayProcessing(10);
-                            Console.WriteLine();
-                            break;
-                        case 8:
-                            CalcArray.TestNoNegative3D(3, 4, 5);
-                            Console.WriteLine();
-                            break;
-                        case 9:
-                            CalcArray.TestCalcSumNonnegative(10);
-                            Console.WriteLine();
-                            break;
-                        case 10:
-                            CalcArray.TestCalcSumEvenPosition(4, 5);
-                            Console.WriteLine();
-                            break;
-                        default:
-                            break;
-                    }
+                    case 1:
+                        CalcMath.CalcRectangleSquare();
+                        Console.WriteLine();
+                        break;
+                    case 2:
+                        DrawTriangles.DrawRightTriangle();
+                        Console.WriteLine();
+                        break;
+                    case 3:
+                        DrawTriangles.DrawEqualTriangle();
+                        Console.WriteLine();
+                        break;
+                    case 4:
+                        DrawTriangles.DrawXmasTree();
+                        Console.WriteLine();
+                        break;
+                    case 5:
+                        CalcMath.CalcSumMultipleNumbers(1000, 3, 5);
+                        Console.WriteLine();
+                        break;
+                    case 6:
+                        ProcessFont.FontAdjustment();
+                        Console.WriteLine();
+                        break;
+                    case 7:
+                        CalcArray.ArrayProcessing(10);
+                        Console.WriteLine();
+                        break;
+                    case 8:
+                        CalcArray.TestNoNegative3D(3, 4, 5);
+                        Console.WriteLine();
+                        break;
+                    case 9:
+                        CalcArray.TestCalcSumNonnegative(10);
+                        Console.WriteLine();
+                        break;
+                    case 10:
+                        CalcArray.TestCalcSumEvenPosition(4, 5);
+                        Console.WriteLine();
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -83,71 +93,56 @@ namespace Task1_1
     {
         public static void DrawRightTriangle()
         {
-            Console.Write("Введите целое число N: ");
+            int lineNumber = InputNumber();
 
-            if (Int32.TryParse(Console.ReadLine(), out int num))
+            if (lineNumber > 0)
             {
-                if (num > 0)
+                Console.WriteLine();
+
+                StringBuilder s = new StringBuilder(lineNumber);
+
+                for (int line = 0; line < lineNumber; line++)
                 {
-                    Console.WriteLine();
-
-                    StringBuilder s = new StringBuilder(num);
-
-                    for (int line = 1; line <= num; line++)
-                    {
-                        s.Append('*');
-                        Console.WriteLine(s);
-                    }
-                }
-                else Console.WriteLine("Число должно быть больше нуля");
+                    s.Append('*');
+                    Console.WriteLine(s);
+                }  
             }
-            else Console.WriteLine("Неверный формат числа");
 
             Console.ReadKey();
         }
 
         public static void DrawEqualTriangle()
         {
-            Console.Write("Введите целое число N: ");
+            int lineNumber = InputNumber();
 
-            if (Int32.TryParse(Console.ReadLine(), out int num))
+            if (lineNumber > 0)
             {
-                if (num > 0)
-                {
-                    Console.WriteLine();
+                Console.WriteLine();
 
-                    DrawArbitraryEqualTriangle(num, 0);
-                }
-                else Console.WriteLine("Число должно быть больше нуля");
+                DrawArbitraryEqualTriangle(lineNumber, 0); 
             }
-            else Console.WriteLine("Неверный формат числа");
 
             Console.ReadKey();
         }
 
         public static void DrawXmasTree()
         {
-            Console.Write("Введите целое число N: ");
+            int triangleNumber = InputNumber();
 
-            if (Int32.TryParse(Console.ReadLine(), out int num))
+            if (triangleNumber > 0)
             {
-                if (num > 0)
-                {
-                    Console.WriteLine();
+                Console.WriteLine();
 
-                    for (int i = 0; i <= num; i++)
-                    {
-                        DrawArbitraryEqualTriangle(i + 1, num - i);
-                    }
+                for (int i = 0; i <= triangleNumber; i++)
+                {
+                    DrawArbitraryEqualTriangle(i + 1, triangleNumber - i); 
                 }
-                else Console.WriteLine("Число должно быть больше нуля");
             }
-            else Console.WriteLine("Неверный формат числа");
 
             Console.ReadKey();
         }
 
-        static void DrawArbitraryEqualTriangle(int num, int offset)
+        private static void DrawArbitraryEqualTriangle(int num, int offset)
         {
             StringBuilder s = new StringBuilder(offset + num * 2 - 1);
 
@@ -160,6 +155,23 @@ namespace Task1_1
                 Console.WriteLine(s.Remove(0, 1).Append('*', 2));
             }
         }
+
+        private static int InputNumber()
+        {
+            Console.Write("Введите целое число N: ");
+
+            if (Int32.TryParse(Console.ReadLine(), out int num))
+            {
+                if (num > 0)
+                {
+                    return num;
+                }
+                else Console.WriteLine("Число должно быть больше нуля");
+            }
+            else Console.WriteLine("Неверный формат числа");
+
+            return -1;
+        }
     }
 
     class CalcMath
@@ -167,35 +179,38 @@ namespace Task1_1
         public static void CalcRectangleSquare()
         {
             Console.Write("Введите длину стороны прямоугольника a: ");
-            int a = Int32.Parse(Console.ReadLine());
+            string inputA = Console.ReadLine();
 
             Console.Write("Введите длину стороны прямоугольника b: ");
-            int b = Int32.Parse(Console.ReadLine());
+            string inputB = Console.ReadLine();
 
-            if ((a > 0) && (b > 0))
+            if (Int32.TryParse(inputA, out int a) && 
+                Int32.TryParse(inputB, out int b))
             {
-                int s = a * b;
-                Console.WriteLine("Площадь прямоугольника равна {0}", s);
+                if ((a > 0) && (b > 0))
+                {
+                    Console.WriteLine($"Площадь прямоугольника равна {a * b}");
+                }
+                else Console.WriteLine("Длина стороны прямоугольника должна быть больше нуля");
             }
-            else Console.WriteLine("Длина стороны прямоугольника должна быть больше нуля");
+            
+            Console.ReadKey();
+        }
+
+        public static void CalcSumMultipleNumbers(int number, int multiplier_1, int multiplier_2)
+        {
+            int sum = SumMultiple(number, multiplier_1) + SumMultiple(number, multiplier_2) - SumMultiple(number, multiplier_1 * multiplier_2);
+
+            Console.WriteLine($"Сумма натуральных чисел меньше {number}, кратных {multiplier_1} и {multiplier_2}, равна {sum}");
 
             Console.ReadKey();
         }
 
-        public static void CalcSumMultipleNumbers(int num, int m1, int m2)
+        private static int SumMultiple(int num, int mult)
         {
-            int sum = SumMultiple(num, m1) + SumMultiple(num, m2) - SumMultiple(num, m1 * m2);
+            int memberNum = (num - 1) / mult;                     
 
-            Console.WriteLine("Сумма натуральных чисел меньше {0}, кратных {1} и {2}, равна {3}", num, m1, m2, sum);
-
-            Console.ReadKey();
-        }
-
-        static int SumMultiple(int num, int m)
-        {
-            int n = (num - 1) / m;
-
-            return (m * 2 + m * (n - 1)) * n / 2;   //Arithmetic progression sum
+            return (mult * 2 + mult * (memberNum - 1)) * memberNum / 2;   //Arithmetic progression sum
         }
     }
 
@@ -208,7 +223,7 @@ namespace Task1_1
             public bool underline;
         }
 
-        static Font font = new Font { bold = false, italic = false, underline = false };
+        private static Font font = new Font { bold = false, italic = false, underline = false };
 
         public static void FontAdjustment()
         {
@@ -244,23 +259,34 @@ namespace Task1_1
             while (input != "q");
         }
 
-        static void OutputFont()
+        private static void OutputFont()
         {
             Console.Write("Параметры надписи: ");
 
             string type;
 
-            if ((!font.bold)&&(!font.italic)&&(!font.underline))
+            if (!font.bold && !font.italic && !font.underline)
             {
                 type = "None";
             }
             else
             {
-                type = "";
+                type = String.Empty;
 
-                if (font.bold)  type += "Bold, ";
-                if (font.italic) type += "Italic, ";
-                if (font.underline) type += "Underline";
+                if (font.bold)
+                {
+                    type += "Bold, ";
+                }
+
+                if (font.italic)
+                {
+                    type += "Italic, ";
+                }
+
+                if (font.underline)
+                {
+                    type += "Underline";
+                }
 
                 char[] charsToTrim = { ',', ' ' };
                 type = type.Trim(charsToTrim);
@@ -281,33 +307,42 @@ namespace Task1_1
 
         public static void ArrayProcessing(int arrSize)
         {
-            int[] arrUnsorted = new int[arrSize];
-            int[] arrSorted = new int[arrSize];
+            FillRandomArrayWithSort(arrSize, out int[] arrUnsorted, out int[] arrSorted);
+
+            DisplayArraysWithSort(arrUnsorted, arrSorted);
+
+            Console.ReadKey();
+        }
+
+        private static void FillRandomArrayWithSort(int size, out int[] arrUnsorted, out int[] arrSorted)
+        {
+            arrUnsorted = new int[size];
+            arrSorted = new int[size];
 
             int num;
-            int k;
+            int index;
 
-            for (int i = 0; i < arrSize; i++)
+            for (int i = 0; i < size; i++)
             {
                 num = rnd.Next(-100, 101);
 
                 arrUnsorted[i] = num;
 
                 //Insertion sort
-                k = i;
+                index = i;
 
-                while ((k > 0) && (num < arrSorted[k - 1]))
+                while ((index > 0) && (num < arrSorted[index - 1]))
                 {
-                    arrSorted[k] = arrSorted[k - 1];
-                    k--;
+                    arrSorted[index] = arrSorted[index - 1];
+                    index--;
                 }
 
-                arrSorted[k] = num;
+                arrSorted[index] = num;
             }
+        }
 
-            int arrMin = arrSorted[0];
-            int arrMax = arrSorted[arrSize - 1];
-
+        private static void DisplayArraysWithSort(int[] arrUnsorted, int[] arrSorted)
+        {
             Console.WriteLine("Исходный массив случайных целых чисел от -100 до 100:");
             Console.WriteLine(string.Join(' ', arrUnsorted));
             Console.WriteLine();
@@ -316,41 +351,43 @@ namespace Task1_1
             Console.WriteLine(string.Join(' ', arrSorted));
             Console.WriteLine();
 
-            Console.WriteLine("Максимальное значение в массиве: {0}", arrMax);
-            Console.WriteLine("Минимальное значение в массиве: {0}", arrMin);
-
-            Console.ReadKey();
+            Console.WriteLine("Максимальное значение в массиве: {0}", arrSorted[arrSorted.Length - 1]);
+            Console.WriteLine("Минимальное значение в массиве: {0}", arrSorted[0]);
         }
 
         public static void TestNoNegative3D(int arrSize1, int arrSize2, int arrSize3)
         {
-            int[,,] arr = new int[arrSize1, arrSize2, arrSize3];
+            FillRandomArray3D(arrSize1, arrSize2, arrSize3, out int[,,] arr);
 
             Console.WriteLine("Исходный трехмерный массив случайных целых чисел от -100 до 100:");
-
-            for (int i3 = 0; i3 < arrSize3; i3++)
-            {
-                for (int i1 = 0; i1 < arrSize1; i1++)
-                {
-                    for (int i2 = 0; i2 < arrSize2; i2++)
-                    {
-                        arr[i1, i2, i3] = rnd.Next(-100, 101);
-                        Console.Write("{0}\t", arr[i1, i2, i3]);
-                    }
-                    Console.WriteLine();
-                }
-                Console.WriteLine();
-            }
+            DisplayArray3D(arr);
 
             NoNegative3D(arr);
+
+            Console.WriteLine("Трехмерный массив после замены положительных чисел на нули:");
+            DisplayArray3D(arr);
 
             Console.ReadKey();
         }
 
-        static void NoNegative3D(int[,,] arr)
+        private static void FillRandomArray3D(int size1, int size2, int size3, out int[,,] arr)
         {
-            Console.WriteLine("Трехмерный массив после замены положительных чисел на нули:");
+            arr = new int[size1, size2, size3];
 
+            for (int i3 = 0; i3 < size3; i3++)
+            {
+                for (int i1 = 0; i1 < size1; i1++)
+                {
+                    for (int i2 = 0; i2 < size2; i2++)
+                    {
+                        arr[i1, i2, i3] = rnd.Next(-100, 101);
+                    }
+                }
+            }
+        }
+
+        private static void NoNegative3D(int[,,] arr)
+        {
             for (int i3 = 0; i3 < arr.GetLength(2); i3++)
             {
                 for (int i1 = 0; i1 < arr.GetLength(0); i1++)
@@ -361,6 +398,19 @@ namespace Task1_1
                         {
                             arr[i1, i2, i3] = 0;
                         }
+                    }
+                }
+            }
+        }
+
+        private static void DisplayArray3D(int[,,] arr)
+        {
+            for (int i3 = 0; i3 < arr.GetLength(2); i3++)
+            {
+                for (int i1 = 0; i1 < arr.GetLength(0); i1++)
+                {
+                    for (int i2 = 0; i2 < arr.GetLength(1); i2++)
+                    {
                         Console.Write("{0}\t", arr[i1, i2, i3]);
                     }
                     Console.WriteLine();
@@ -371,24 +421,33 @@ namespace Task1_1
 
         public static void TestCalcSumNonnegative(int arrSize)
         {
-            int[] arr = new int[arrSize];
+            FillRandomArray(arrSize, out int[] arr);
 
-            Console.WriteLine("Исходный одномерный массив случайных целых чисел от -100 до 100:");
-
-            for (int i = 0; i < arrSize; i++)
-            {
-                arr[i] = rnd.Next(-100, 101);
-                Console.Write("{0} ", arr[i]);
-            }
-            Console.WriteLine();
-            Console.WriteLine();
+            DisplayArray(arr);
 
             CalcSumNonnegative(arr);
 
             Console.ReadKey();
         }
 
-        static void CalcSumNonnegative(int[] arr)
+        private static void FillRandomArray(int size, out int[] arr)
+        {
+            arr = new int[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                arr[i] = rnd.Next(-100, 101);
+            }
+        }
+
+        private static void DisplayArray(int[] arr)
+        {
+            Console.WriteLine("Исходный одномерный массив случайных целых чисел от -100 до 100:");
+            Console.WriteLine(string.Join(' ', arr));
+            Console.WriteLine();
+        }
+
+        private static void CalcSumNonnegative(int[] arr)
         {
             int sum = 0;
 
@@ -405,25 +464,43 @@ namespace Task1_1
 
         public static void TestCalcSumEvenPosition(int arrSize1, int arrSize2)
         {
-            int[,] arr = new int[arrSize1, arrSize2];
+            FillRandomArray2D(arrSize1, arrSize2, out int[,] arr);
 
-            Console.WriteLine("Исходный двумерный массив случайных целых чисел от -100 до 100:");
-
-            for (int i1 = 0; i1 < arrSize1; i1++)
-            {
-                for (int i2 = 0; i2 < arrSize2; i2++)
-                {
-                    arr[i1, i2] = rnd.Next(-100, 101);
-                    Console.Write("{0}\t", arr[i1, i2]);
-                }
-                Console.WriteLine();
-            }
+            DisplayArray2D(arr);
 
             CalcSumEvenPosition(arr);
 
             Console.ReadKey();
         }
-        static void CalcSumEvenPosition(int[,] arr)
+
+        private static void FillRandomArray2D(int size1, int size2, out int[,] arr)
+        {
+            arr = new int[size1, size2];
+
+            for (int i1 = 0; i1 < size1; i1++)
+            {
+                for (int i2 = 0; i2 < size2; i2++)
+                {
+                    arr[i1, i2] = rnd.Next(-100, 101);
+                }
+            }
+        }
+
+        private static void DisplayArray2D(int[,] arr)
+        {
+            Console.WriteLine("Исходный двумерный массив случайных целых чисел от -100 до 100:");
+
+            for (int i1 = 0; i1 < arr.GetLength(0); i1++)
+            {
+                for (int i2 = 0; i2 < arr.GetLength(1); i2++)
+                {
+                    Console.Write($"{arr[i1, i2]}\t");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void CalcSumEvenPosition(int[,] arr)
         {
             int sum = 0;
 
