@@ -8,43 +8,53 @@ namespace Task1_2
     {
         static void Main(string[] args)
         {
-            while (true)
+            string input = String.Empty;
+
+            while (input != "q")
             {
-                Console.WriteLine("Введите номер подзадачи или q чтобы закрыть программу:");
-                Console.WriteLine("1 Averages");
-                Console.WriteLine("2 Doubler");
-                Console.WriteLine("3 Lowercase");
-                Console.WriteLine("4 Validator");
+                DisplayTaskList();
+
+                input = Console.ReadLine();
+                SelectTask(input);
+            }
+        }
+
+        static void DisplayTaskList()
+        {
+            Console.WriteLine("Введите номер подзадачи или q чтобы закрыть программу:");
+            Console.WriteLine("1 Averages");
+            Console.WriteLine("2 Doubler");
+            Console.WriteLine("3 Lowercase");
+            Console.WriteLine("4 Validator");
+            Console.WriteLine();
+        }
+
+        static void SelectTask(string userInput)
+        {
+            if (Int32.TryParse(userInput, out int taskNumber))
+            {
                 Console.WriteLine();
 
-                string input = Console.ReadLine();
-
-                if (input == "q") break;
-                else if (Int32.TryParse(input, out int num))
+                switch (taskNumber)
                 {
-                    Console.WriteLine();
-
-                    switch (num)
-                    {
-                        case 1:
-                            ProcessString.CalcWordAverage();
-                            Console.WriteLine();
-                            break;
-                        case 2:
-                            ProcessString.DoubleSymbols();
-                            Console.WriteLine();
-                            break;
-                        case 3:
-                            ProcessString.CountLowercaseWords();
-                            Console.WriteLine();
-                            break;
-                        case 4:
-                            ProcessString.TypeUppercase();
-                            Console.WriteLine();
-                            break;
-                        default:
-                            break;
-                    }
+                    case 1:
+                        ProcessString.CalcWordAverage();
+                        Console.WriteLine();
+                        break;
+                    case 2:
+                        ProcessString.DoubleSymbols();
+                        Console.WriteLine();
+                        break;
+                    case 3:
+                        ProcessString.CountLowercaseWords();
+                        Console.WriteLine();
+                        break;
+                    case 4:
+                        ProcessString.TypeUppercase();
+                        Console.WriteLine();
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -165,7 +175,7 @@ namespace Task1_2
             Console.ReadKey();
         }
 
-        static string Capitalize(string s, List<int> ind)
+        private static string Capitalize(string s, List<int> ind)
         {
             char[] chars = s.ToCharArray();
 
